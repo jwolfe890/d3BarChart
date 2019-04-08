@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      var dataset = [5, 8, 15, 20, 25, 10, 2, 4, 90, 40];
+      var barPadding = 1;
+      var w = 500;
+      var h = 150;
+
+      var svg = d3
+        .select("body")
+        .append("svg")
+        .attr("height", h)
+        .attr("width", w);
+
+      svg
+        .selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("height", function(d) {
+          return d;
+        })
+        .attr("width", 30)
+        .attr("x", function(d, i) {
+          return i * (w / dataset.length - barPadding);
+        })
+        .attr("y", function(d) {
+          return h - d;
+        })
+        .style("fill", "blue");
+
+      svg
+        .selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(function(d) {
+          return d;
+        })
+        .attr("x", function(d, i) {
+          return i * (w / dataset.length - barPadding) + 15;
+        })
+        .attr("y", function(d) {
+          return h - d - 3;
+        })
+        .attr("text-anchor", "middle");
+    </script>
+  </body>
+</html>
